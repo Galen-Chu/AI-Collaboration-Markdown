@@ -27,6 +27,33 @@
 
 ---
 
+## 📖 技術深度指南
+
+如果你對 **MCP Server 實作**、**Prompt Engineering** 或 **Tool Calling** 的技術細節感興趣，我準備了完整的技術文件：
+
+### 🔌 [MCP Server 實作範例](./docs/01-mcp-server-implementation.md)
+深入探討 MCP Server 的架構設計與實作：
+- MCP 核心概念與應用場景
+- 完整的實作步驟與程式碼範例
+- Tools、Resources、Prompts 三大能力的實戰應用
+- 最佳實踐與進階技巧
+
+### 💡 [Prompt Engineering 實戰技巧](./docs/02-prompt-engineering.md)
+掌握與 AI 高效協作的核心技能：
+- Prompt Engineering 的核心原則
+- 角色設定、思維鏈、少樣本學習等常用模式
+- 進階技巧與 Prompt 模板庫
+- 實戰案例展示
+
+### 🛠️ [Tool Calling 應用場景](./docs/03-tool-calling-use-cases.md)
+探索 AI 執行力的無限可能：
+- Tool Calling 的核心應用場景
+- 完整的實作案例（���服機器人、資料分析、DevOps）
+- 進階技巧與安全性考量
+- 效能優化與測試策略
+
+---
+
 ## 💡 核心體悟
 > **「AI 的上限，取決於你的提問力與想像力。」**
 
