@@ -1,4 +1,4 @@
-# AI-Collaboration-Insights
+# AI-Collaboration-Markdown
 # 🚀 2025 AI 協作實踐：從工具進化為數位夥伴
 
 ![AI](https://img.shields.io/badge/Focus-AI--LLM-blue) ![MCP](https://img.shields.io/badge/Tech-MCP--Server-orange) ![Status](https://img.shields.io/badge/Status-Active-green)
