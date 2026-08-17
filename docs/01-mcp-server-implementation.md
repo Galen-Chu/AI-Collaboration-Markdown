@@ -1,10 +1,15 @@
-# MCP Server 實作範例
+# MCP Server 實作指南
+
+> 本文同時涵蓋 **TypeScript** 與 **Python** 兩種實作路徑，並串聯
+> [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) 的實際架構。
 
 ## 📚 目錄
 - [什麼是 MCP Server？](#什麼是-mcp-server)
 - [為什麼需要 MCP？](#為什麼需要-mcp)
 - [架構設計](#架構設計)
-- [實作步驟](#實作步驟)
+- [TypeScript 實作](#typescript-實作)
+- [Python 實作](#python-實作)
+- [我的生態系整合](#我的生態系整合)
 - [完整範例](#完整範例)
 - [最佳實踐](#最佳實踐)
 
@@ -40,6 +45,114 @@
 ### 問題場景 3：工具整合
 ❌ **傳統方式：** 只能提供程式碼建議，無法實際執行
 ✅ **MCP 方式：** 可直接執行 Git 指令、執行測試、部署流程
+
+### 問題場景 4：與個人知識庫整合（2026 現況）
+❌ **傳統方式：** AI 不知道你的筆記、日誌、學習進度
+✅ **MCP 方式：** 透過 Obsidian MCP + Notion MCP，AI 直接讀寫你的 vault 和登記簿
+
+---
+
+## Python 實作
+
+### 環境準備
+
+```bash
+pip install mcp
+```
+
+### 基本 Python MCP Server
+
+```python
+"""
+Python MCP Server — 專案分析工具
+使用官方 mcp 套件（Python SDK）
+"""
+from mcp.server import Server
+from mcp.types import Tool, Resource, TextContent
+import json
+import os
+
+app = Server("project-analyzer")
+
+@app.list_tools()
+async def list_tools() -> list[Tool]:
+    return [
+        Tool(
+            name="scan_project",
+            description="掃描專案目錄結構",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "root_path": {"type": "string", "description": "專案根目錄路徑"}
+                },
+                "required": ["root_path"]
+            }
+        )
+    ]
+
+@app.call_tool()
+async def call_tool(name: str, arguments: dict):
+    if name == "scan_project":
+        root = arguments["root_path"]
+        result = {}
+        for entry in os.scandir(root):
+            if entry.is_dir() and not entry.name.startswith('.'):
+                result[entry.name] = "directory"
+            elif entry.is_file():
+                result[entry.name] = "file"
+        return [TextContent(type="text", text=json.dumps(result, indent=2))]
+
+if __name__ == "__main__":
+    from mcp.server.stdio import stdio_server
+    import asyncio
+    asyncio.run(stdio_server(app))
+```
+
+### 在 Claude Desktop 中使用（Python）
+
+```json
+{
+  "mcpServers": {
+    "project-analyzer": {
+      "command": "python",
+      "args": ["path/to/server.py"]
+    }
+  }
+}
+```
+
+---
+
+## 我的生態系整合
+
+我在 [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) 中使用了兩個 MCP Server：
+
+| MCP Server | 用途 | 服務對象 |
+|-----------|------|---------|----------|
+| **Notion MCP** | Agent 執行狀態追蹤（登記簿讀寫） | `mod-registry-sync` 模組 |
+| **Obsidian MCP** | 內容寫入（日記、Work Log） | `personal-assistant` |
+
+### 為什麼選擇這個分工？
+
+```
+                    ┌─────────────────┐
+                    │  Notion MCP     │  ← 狀態追蹤（跨雲端/本機）
+                    │  (登記簿)       │     wf-news-digest 等雲端 pipeline 用
+                    └─────────────────┘
+                    ┌─────────────────┐
+                    │  Obsidian MCP   │  ← 內容典藏（僅本機）
+                    │  (vault 寫入)    │     personal-assistant 本機觸發用
+                    └─────────────────┘
+```
+
+**關鍵限制**：Obsidian MCP 依賴本機 127.0.0.1 REST API，需要 Obsidian 應用程式保持執行中。因此雲端 pipeline（Claude.ai 排程）一律走 Notion，只有本機觸發的才走 Obsidian。
+
+### 實際應用場景
+
+| Pipeline | 使用哪個 MCP | 為什麼 |
+|---------|-------------|--------|
+| `wf-news-digest` | Notion | Claude.ai 排程，連不到本機 |
+| `personal-assistant` | Obsidian | 本機觸發（cron），可直連 vault |
 
 ---
 

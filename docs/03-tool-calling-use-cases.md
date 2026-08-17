@@ -1,5 +1,8 @@
 # Tool Calling 應用場景實戰
 
+> 本文結合我的 G-Code 生態系實際案例，展示 Tool Calling 如何在
+> 多層 Agent 架構、CI/CD 管線、和 MCP 整合中運作。
+
 ## 📚 目錄
 - [什麼是 Tool Calling？](#什麼是-tool-calling)
 - [為什麼需要 Tool Calling？](#為什麼需要-tool-calling)
@@ -1231,6 +1234,78 @@ describe('Tool Chain: Order Processing', () => {
 
 ---
 
+## 我的生態系實戰案例
+
+### 案例 1：G-Code 專案 CI/CD 整合（program-g-code）
+
+在 [program-g-code](https://github.com/Galen-Chu/program-g-code) 中，Tool Calling 體現在閉環自測試：
+
+```
+GitHub Actions 觸發
+  → 呼叫工具包的 lint.sh（auto-detect Node.js/Python）
+  → 呼叫 test.sh（偵測 Jest/pytest 並執行）
+  → 呼叫 build.sh --dry-run（模擬建置）
+  → 呼叫 deploy.sh --dry-run（模擬部署）
+  → 呼叫 health-check.sh（驗證 mock server）
+```
+
+工具包本身不判斷專案類型——AI 或使用者透過 `config/ci-cd.conf` 的
+`target_projects` 參數指定目標，工具包的腳本 auto-detect 並執行。
+
+### 案例 2：Agent 層級間的 Tool 委派（AI-Agent-Skill）
+
+在 [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) 的四層架構中，
+Tool Calling 就是層級之間的委派機制：
+
+```
+orch-main（① 協調層）
+  → Agent tool → wf-news-digest（② 工作流層）
+    → Agent tool → mod-web-scraper（③ 能力模組層）
+      → WebFetch/WebSearch → 外部資料來源
+```
+
+**關鍵設計**：③ 層的能力模組不判斷「誰在呼叫我」——它只知道自己該做什麼。
+這使得同一個 `mod-summarizer` 可以被新聞摘要、學術審查、財報分析等多個
+工作流呼叫，不需要任何修改。
+
+### 案例 3：Pipeline 評估閘門（AI-Pipeline-Hook + AI-Eval-Rubric）
+
+在排程系統中，評估是一種「Tool Calling 的 Tool Calling」：
+
+```yaml
+# pipelines/daily-news-report.yaml 的一個步驟
+steps:
+  - id: evaluate_output
+    type: claude-skill
+    skill: mod-eval-report          # AI-Agent-Skill 中的評估模組
+    rubric: documentation            # AI-Eval-Rubric 中的評估規格
+```
+
+```
+Pipeline Runner（AI-Pipeline-Hook）
+  → 呼叫 mod-eval-report（AI-Agent-Skill）
+    → 讀取 documentation rubric（AI-Eval-Rubric）
+      → 比對產出與規格
+        → 產出 pass/fail 報告
+```
+
+### 案例 4：Obsidian MCP 的讀寫整合
+
+在 [Obsidian Journal](https://github.com/Galen-Chu/Obsidian_Journal) 中，
+`personal-assistant` Agent 透過 Obsidian MCP 寫入日誌：
+
+```
+personal-assistant（① 協調層）
+  → Obsidian MCP（Local REST API）
+    → 寫入 daily/life/2026-08-17.md
+    → 遵循 obsidian-note-conventions Skill 的格式
+```
+
+**已知限制**：Obsidian MCP 需要 Obsidian 應用程式保持執行中（127.0.0.1 REST API），
+因此只適合本機觸發的 pipeline，不適合雲端排程。
+
+---
+
 ## 總結
 
 Tool Calling 讓 AI 從「被動回應者」變成「主動執行者」：
@@ -1245,6 +1320,7 @@ Tool Calling 讓 AI 從「被動回應者」變成「主動執行者」：
 2. 嚴格的輸入驗證與權限控制
 3. 完善的錯誤處理機制
 4. 持續的效能優化與測試
+5. **跨專案的生態系整合**——工具應該可以在不同層級間重用
 
 ---
 

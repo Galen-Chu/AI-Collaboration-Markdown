@@ -1,9 +1,14 @@
 # Prompt Engineering 實戰技巧
 
+> 本文從基本原則到進階模式，並串聯我在
+> [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) 中實際使用的
+> Agent Description 三段式公式與 Skill 設計模式。
+
 ## 📚 目錄
 - [什麼是 Prompt Engineering？](#什麼是-prompt-engineering)
 - [核心原則](#核心原則)
 - [常用模式](#常用模式)
+- [Agent Description 公式](#agent-description-公式)
 - [角色設定技巧](#角色設定技巧)
 - [進階技巧](#進階技巧)
 - [實戰案例](#實戰案例)
@@ -802,11 +807,98 @@ API、支付整合、會員系統、管理後台、分析報表...」
 
 ---
 
+## Agent Description 公式
+
+在 [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) 中，我為每個 Agent 和 Skill 定義了一個三段式 Description 公式：
+
+```
+[做什麼功能]。[觸發情境/關鍵字]。[所屬層級與可重用範疇]。
+```
+
+### 為什麼三段式？
+
+| 段落 | 影響什麼 | 範例 |
+|------|---------|------|
+| 第一段 | **自動路由準確度**（AI 判斷該找誰） | 「去重與摘要長文內容」 |
+| 第二段 | **觸發判斷**（什麼時候該被叫） | 「當需要處理新聞、文章或報告時」 |
+| 第三段 | **維護定位**（給未來的自己/團隊看） | 「③ 能力模組，跨領域可重用」 |
+
+### 實際範例：mod-summarizer
+
+```
+ Description: 去重與摘要長文內容，產出結構化重點。當任何工作流需要
+ 處理多來源文本（新聞、文章、報告）時觸發。③ 能力模組，無領域判斷，
+ 換任何領域都適用。
+```
+
+### 好的 Prompt vs 好的 Agent Description
+
+| 面向 | Prompt（一次性） | Agent Description（持續性） |
+|------|-----------------|---------------------------|
+| 生命週期 | 單次對話 | 長期存在，每次被叫都用 |
+| 優化目標 | 得到好答案 | 讓 AI 能正確路由到這個 Agent |
+| 包含內容 | 任務 + 情境 + 期望格式 | 功能 + 觸發條件 + 架構定位 |
+| 適用場景 | 臨時需求 | 可重用的工作流步驟 |
+
+### Skill 的 Prompt 設計原則
+
+Skill（如 `obsidian-note-conventions`）的 Prompt 專注於**可重用的判斷邏輯**：
+
+1. **知識與身分分離**：Skill 放判斷規則（語法、格式、評估框架），Agent 放角色定位與流程協調
+2. **每次啟動不載入不必要的細節**：Agent 本體輕量，需要時才調用 Skill
+3. **開源 Skill 一律改寫，不直接複製**：避免 `${CLAUDE_SKILL_DIR}` 路徑引用被破壞
+
+---
+
+## Claude Code 特有模式
+
+### System Prompt vs User Prompt
+
+在 Claude Code 環境中，Prompt 分為兩層：
+
+| 類型 | 誰寫的 | 什麼時候生效 | 範例 |
+|------|-------|-------------|------|
+| System Prompt | Claude Code 內建/設定檔 | 每次對話 | `.claude/CLAUDE.md` 的專案規則 |
+| User Prompt | 使用者輸入 | 單次對話 | 「幫我重構這個函式」 |
+
+### CLAUDE.md 的寫法
+
+`CLAUDE.md` 是 Claude Code 的專案級 System Prompt，效果最好 的寫法：
+
+```markdown
+# CLAUDE.md
+
+## Commands
+- npm test          # 跑測試
+- npm run build     # 建置
+
+## Architecture
+- Store layer (store/) 是唯一碰 DB 的程式碼
+- 不要直接改 worker/handlers/index.ts
+
+## Conventions
+- 所有 PR 都要跑過 test + lint
+- 變更 model 一定要生成 migration
+```
+
+### 與 AI-Agent-Skill 的 CLAUDE 檔案比較
+
+本 repo 的 20 文件規格中，`CLAUDE` 檔案就是為 AI Agent 設計的 System Prompt：
+
+| 傳統 CLAUDE.md | 20 文件規格的 CLAUDE |
+|--------------|-------------------|
+| 一般規則 + 指令 | 同上，但明確標注受眾是 AI Agent |
+| 可能混入架構說明 | 只放規則，架構放 ARCHITECTURE |
+| 沒有結構化模板 | 有標準模板（見 docs/templates/CLAUDE.md） |
+
+---
+
 ## 參考資源
 
-- [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
 - [Anthropic Prompt Library](https://docs.anthropic.com/claude/prompt-library)
+- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [Prompt Engineering Guide](https://www.promptingguide.ai/)
+- [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) — 我的 Agent/Skill 架構
 
 ---
 
