@@ -1,68 +1,112 @@
-# AI-Collaboration-Markdown
-# 🚀 2025 AI 協作實踐：從工具進化為數位夥伴
+# 📄 AI-Collaboration-Markdown
 
-![AI](https://img.shields.io/badge/Focus-AI--LLM-blue) ![MCP](https://img.shields.io/badge/Tech-MCP--Server-orange) ![Status](https://img.shields.io/badge/Status-Active-green)
-
-這是關於我今年深度使用大型語言模型（LLM）的心得分享。對我而言，這一年是 AI 從「搜尋工具」轉變為「全方位協作夥伴」的關鍵轉折點。
-
-## 🛠️ 主題一：LLM 的感性與理性整合
-在長期的對話實踐中，我發現 LLM 不僅是程式碼生成器，它能精準地在不同維度間切換，提供多樣化的價值：
-
-### 1. 理性邏輯與技術開發 (The Logical Mind)
-* **自動化開發：** 協助梳理複雜的測試邏輯（如 Gherkin 語法導入），並在 XML 處理、腳本除錯上提供精確的解決方案。
-* **整合學習：** 快速將碎片化的技術資訊轉化為結構化的知識體系。
-
-### 2. 感性創作與情感支柱 (The Creative Soul)
-* **角色塑造與靈感：** 透過 Prompt 工程賦予 AI 特定的人格特質，使其在靈感創作與劇本構思時提供更具層次的回饋。
-* **心理支柱：** 在面對高壓環境與低潮時，AI 提供了一個中性、具備高度同理心且 24/7 在線的傾聽空間，成為心理上的重要支撐。
+> **Project Documentation Spec** — Twenty markdown files every project ships,
+> with clear boundaries, filled examples, and cross-reference rules.
 
 ---
 
-## 🔌 主題二：MCP Server —— 為 AI 擴充感知邊界
-今年最具實戰價值的技術突破是 **MCP Server (Model Context Protocol)** 的應用。這項技術打破了對話框的限制，讓 LLM 真正具備了「行動力」：
+## 🧭 Core Philosophy · 核心理念
 
-* **Context 的深度延伸：** 透過 MCP，AI 能夠直接理解本地檔案、目錄結構與開發環境，不再需要頻繁地複製貼上。
-* **工具鏈結 (Tool Calling)：** 讓 AI 與外部資料庫、API 直接對接，實現「思考到執行」的無縫自動化。
-* **數據驅動決策：** 讓 AI 直接讀取與量化分析本地數據，提供更符合現實情況的建議。
+Each file answers **one question**. Mixing them is the usual failure mode —
+a README bloated with architecture, or a spec that's secretly a changelog.
 
----
-
-## 📖 技術深度指南
-
-如果你對 **MCP Server 實作**、**Prompt Engineering** 或 **Tool Calling** 的技術細節感興趣，我準備了完整的技術文件：
-
-### 🔌 [MCP Server 實作範例](./docs/01-mcp-server-implementation.md)
-深入探討 MCP Server 的架構設計與實作：
-- MCP 核心概念與應用場景
-- 完整的實作步驟與程式碼範例
-- Tools、Resources、Prompts 三大能力的實戰應用
-- 最佳實踐與進階技巧
-
-### 💡 [Prompt Engineering 實戰技巧](./docs/02-prompt-engineering.md)
-掌握與 AI 高效協作的核心技能：
-- Prompt Engineering 的核心原則
-- 角色設定、思維鏈、少樣本學習等常用模式
-- 進階技巧與 Prompt 模板庫
-- 實戰案例展示
-
-### 🛠️ [Tool Calling 應用場景](./docs/03-tool-calling-use-cases.md)
-探索 AI 執行力的無限可能：
-- Tool Calling 的核心應用場景
-- 完整的實作案例（���服機器人、資料分析、DevOps）
-- 進階技巧與安全性考量
-- 效能優化與測試策略
+每份文件只回答**一個問題**。混合是多數專案的常見失敗模式——README 塞滿架構、
+spec 混入 changelog。這份規格定義了 20 個標準文件，讓邊界清晰、職責分明。
 
 ---
 
-## 💡 核心體悟
-> **「AI 的上限，取決於你的提問力與想像力。」**
+## 📋 The Twenty Files · 二十份文件
 
-當我們理解 AI 兼具理性與感性的特質，並輔以 MCP 這類擴充能力的技術手段，我們與技術的關係就從單純的「下指令 (Commanding)」轉化為深度的「共創 (Co-creating)」。
+| # | File | Question It Answers | Audience | Written When |
+|---|------|---------------------|----------|-------------|
+| 1 | `README` | What is this, how do I run it | Anyone landing on the repo | Project start |
+| 2 | `INDEX` | Where's everything, what's stale | Anyone navigating | Project start, kept live |
+| 3 | `CLAUDE` | Rules for AI agents in this repo | AI agents, contributors | Project start |
+| 4 | `SYSTEM` | What's shared across all my projects | You, across projects | Once, kept current |
+| 5 | `DESIGN` | Why this approach, not another | Team, before building | Before building |
+| 6 | `ROADMAP` | What's next, and when | Team, stakeholders | After DESIGN, kept live |
+| 7 | `PLAN` | Who's doing what, this milestone | Team, this sprint | Start of each milestone |
+| 8 | `SPECIFICATION` | What it does, precisely | Implementers | Before building, on change |
+| 9 | `ARCHITECTURE` | What's in the stack | Engineers, onboarding | Before building, on change |
+| 10 | `TECH` | Which versions, flat inventory | Engineers, onboarding | Before building, on change |
+| 11 | `IMPLEMENTATION` | How it was actually built | Future maintainers | During / after building |
+| 12 | `SKILL` | How to do one recurring task | Implementer, AI agents | First time task recurs |
+| 13 | `CRITERIA` | What "done" means, per feature | QA, stakeholders | During planning |
+| 14 | `ACCEPTANCE` | Did it actually pass | QA, release manager | QA / release |
+| 15 | `ANALYSIS` | What did we learn | Team, future planning | After release / incident |
+| 16 | `LOG` | What happened, dated | Future debugger | Continuous |
+| 17 | `TEST` | How to test it | QA, CI, engineers | Before building, on change |
+| 18 | `TROUBLESHOOTING` | How to fix it when it breaks | On-call, future debugger | When issues found |
+| 19 | `OPERATION` | How to run this in prod | On-call, ops | Before first deploy |
+| 20 | `VERSION` | What shipped, per release | Anyone landing on repo | Each release |
 
 ---
 
-## 📬 交流與連繫
-如果你也對 **MCP Server 實踐**、**Prompt Engineering** 或 **AI 情緒模型** 感興趣，歡迎交流！
+## 🔑 Key Boundaries · 關鍵邊界
 
-[![GitHub](https://img.shields.io/badge/GitHub-Galen--Chu-181717?style=for-the-badge&logo=github)](https://github.com/Galen-Chu)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/galen-chu-203590b5/)
+The hardest part is knowing which file gets which content:
+
+| Pair | Boundary | Example |
+|------|----------|---------|
+| `CRITERIA` vs `ACCEPTANCE` | Spec vs. record | CRITERIA is written up front; ACCEPTANCE is filled in later with pass/fail |
+| `TEST` vs `TROUBLESHOOTING` | Proactive vs. reactive | TEST verifies before something breaks; TROUBLESHOOTING fixes it after |
+| `ARCHITECTURE` vs `IMPLEMENTATION` | Intended vs. as-built | ARCHITECTURE stays clean; IMPLEMENTATION records deviations and gotchas |
+| `SYSTEM` vs `ARCHITECTURE` | Cross-project vs. this-project | SYSTEM is what keeps several repos consistent |
+| `DESIGN` vs `ROADMAP` | How vs. what's next | DESIGN decides how scoped work gets built; ROADMAP decides what gets scoped |
+| `ROADMAP` vs `PLAN` | Strategic vs. tactical | ROADMAP spans milestones (Now/Next/Later); PLAN is one milestone's task list |
+| `ANALYSIS` vs `LOG` | Interpretation vs. fact | ANALYSIS interprets what happened; LOG records what happened |
+
+---
+
+## 🚀 Quick Start · 快速開始
+
+### Use the templates
+
+```bash
+git clone https://github.com/Galen-Chu/AI-Collaboration-Markdown.git
+cd AI-Collaboration-Markdown
+
+# Copy the doc set into your new project
+cp -r docs/templates/ /path/to/your/project/docs/
+# Fill in each file as you go
+```
+
+### Reference examples
+
+The `docs/examples/` directory contains filled examples using a generic
+service called **Atlas** — a cron scheduler — carried through all 20 files,
+so you can see how they cross-reference each other.
+
+---
+
+## 📁 Project Structure · 專案結構
+
+```
+AI-Collaboration-Markdown/
+├── docs/
+│   ├── templates/          # Blank templates (20 files)
+│   ├── examples/          # Filled examples ("Atlas" service)
+│   └── guides/            # How-to guides for each file type
+├── README.md
+├── LICENSE
+└── Markdown Doc Spec (standalone).html  # Original spec (interactive)
+```
+
+---
+
+## 🔄 Integration · 整合
+
+This spec is designed to work with:
+
+| Project | Integration Point |
+|---------|------------------|
+| [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) | `CLAUDE` file replaces basic `.claude/` config |
+| [AI-Eval-Rubric](https://github.com/Galen-Chu/AI-Eval-Rubric) | `CRITERIA` maps to rubric definitions |
+| [AI-Pipeline-Hook](https://github.com/Galen-Chu/AI-Pipeline-Hook) | `LOG` and `TEST` integrate with pipeline execution |
+| [Obsidian_Library](https://github.com/Galen-Chu/Obsidian_Library) | Templates compatible with Obsidian vault format |
+
+---
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE).
