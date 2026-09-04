@@ -4,6 +4,7 @@
 > with clear boundaries, filled examples, and cross-reference rules.
 
 ---
+
 ## 🧭 Core Philosophy · 核心理念
 
 Each file answers **one question**. Mixing them is the usual failure mode —
