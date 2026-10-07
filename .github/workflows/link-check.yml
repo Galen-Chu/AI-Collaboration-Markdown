@@ -17,8 +17,17 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: true
+          output: lychee-report.md
           args: >-
+            --config .github/lychee.toml
             --no-progress
             --max-retries 2
             --retry-wait-time 5
             './**/*.md'
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee-report.md

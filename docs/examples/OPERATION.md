@@ -28,5 +28,5 @@ Redeploy the previous image. Migrations are additive-only; no down step needed.
 
 | Var | Example | Notes |
 |---|---|---|
-| DATABASE_URL | postgres://… | required |
+| DATABASE_URL | `postgres://…` | required |
 | TICK_MS | 1000 | poll interval |
