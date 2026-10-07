@@ -1,0 +1,9 @@
+# Excluded from link-check CI. Every entry needs a reason.
+
+exclude = [
+  # LinkedIn blocks all bots with HTTP 999; the link works in a browser.
+  "https://www.linkedin.com/*",
+
+  # Private repos — they 404 for CI, by design.
+  "https://github.com/Galen-Chu/Obsidian_*",
+]

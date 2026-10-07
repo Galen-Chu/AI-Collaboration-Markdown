@@ -779,7 +779,7 @@ if (name === 'full_analysis') {
 
 - [MCP 官方文件](https://modelcontextprotocol.io/)
 - [MCP SDK GitHub](https://github.com/modelcontextprotocol/typescript-sdk)
-- [Claude Desktop MCP 設定指南](https://github.com/anthropics/anthropic-quickstarts/tree/main/mcp-server)
+- [MCP Server 官方快速上手](https://modelcontextprotocol.io/quickstart/server)
 
 ---
 
