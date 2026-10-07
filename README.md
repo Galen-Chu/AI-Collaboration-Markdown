@@ -100,10 +100,10 @@ AI-Collaboration-Markdown/
 │   ├── 02-prompt-engineering.md         # Guide · prompt engineering
 │   ├── 03-tool-calling-use-cases.md     # Guide · tool calling use cases
 │   ├── templates/                       # Blank templates (20 files)
-│   └── examples/                        # Filled examples ("Atlas" service)
+│   ├── examples/                        # Filled examples ("Atlas" service)
+│   └── spec/                            # Original spec (interactive HTML)
 ├── README.md
-├── LICENSE
-└── Markdown Doc Spec (standalone).html  # Original spec (interactive)
+└── LICENSE
 ```
 
 ---
