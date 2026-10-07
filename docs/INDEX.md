@@ -23,7 +23,7 @@
 | Directory | Contents | Use |
 |-----------|----------|-----|
 | [templates/](./templates/) | 20 個空白模板 | 複製到新專案填入 |
-| [examples/](./examples/) | 7 個填好的範例（Atlas 服務） | 參考如何交叉引用 |
+| [examples/](./examples/) | 填好的範例（Atlas 服務） | 參考如何交叉引用 |
 
 ### The 20 Files
 
@@ -44,7 +44,7 @@ README → INDEX → CLAUDE → SYSTEM → DESIGN → ROADMAP → PLAN
 
 | Topic | Repository | Covers |
 |-------|-----------|--------|
-| Agent/Skill 架構 | [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) | 四層架構、14 Agent + 10 Skill、MCP 整合 |
+| Agent/Skill 架構 | [AI-Agent-Skill](https://github.com/Galen-Chu/AI-Agent-Skill) | 四層架構、16 Agent + 10 Skill、MCP 整合 |
 | CI/CD 自動化 | [program-g-code](https://github.com/Galen-Chu/program-g-code) | 工具包腳本、閉環自測試 |
 | 排程 Pipeline | [AI-Pipeline-Hook](https://github.com/Galen-Chu/AI-Pipeline-Hook) | Hook → Pipeline → Skills → Output |
 | 評估驗收 | [AI-Eval-Rubric](https://github.com/Galen-Chu/AI-Eval-Rubric) | 5 種評估規格、評估執行器 |

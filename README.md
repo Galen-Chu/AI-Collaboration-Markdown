@@ -66,9 +66,14 @@ The hardest part is knowing which file gets which content:
 git clone https://github.com/Galen-Chu/AI-Collaboration-Markdown.git
 cd AI-Collaboration-Markdown
 
-# Copy the doc set into your new project
+# Copy the doc set into your new project (bash / zsh)
 cp -r docs/templates/ /path/to/your/project/docs/
 # Fill in each file as you go
+```
+
+```powershell
+# Windows (PowerShell)
+Copy-Item -Recurse docs/templates/ C:\path\to\your\project\docs\
 ```
 
 ### Reference examples
@@ -77,6 +82,12 @@ The `docs/examples/` directory contains filled examples using a generic
 service called **Atlas** — a cron scheduler — carried through all 20 files,
 so you can see how they cross-reference each other.
 
+### Dive deeper · 深入閱讀
+
+Three technical guides live under `docs/` — MCP server implementation,
+prompt engineering, and tool calling use cases.
+Start from [docs/INDEX.md](docs/INDEX.md).
+
 ---
 
 ## 📁 Project Structure · 專案結構
@@ -84,9 +95,12 @@ so you can see how they cross-reference each other.
 ```
 AI-Collaboration-Markdown/
 ├── docs/
-│   ├── templates/          # Blank templates (20 files)
-│   ├── examples/          # Filled examples ("Atlas" service)
-│   └── guides/            # How-to guides for each file type
+│   ├── INDEX.md                         # Where's everything — start here
+│   ├── 01-mcp-server-implementation.md  # Guide · MCP server (TS + Python)
+│   ├── 02-prompt-engineering.md         # Guide · prompt engineering
+│   ├── 03-tool-calling-use-cases.md     # Guide · tool calling use cases
+│   ├── templates/                       # Blank templates (20 files)
+│   └── examples/                        # Filled examples ("Atlas" service)
 ├── README.md
 ├── LICENSE
 └── Markdown Doc Spec (standalone).html  # Original spec (interactive)
